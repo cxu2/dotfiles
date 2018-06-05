@@ -76,6 +76,7 @@ set cursorline                   " cursor line; column
 set expandtab                    " insert space characters when tab is pressed
 set tabstop=2                    " insert 2 spaces for a tab, to be used with :retab
 set shiftwidth=2                 " number of space characters inserted for indentation
+set ignorecase                   " ignores cases
 
 " no scroll bars
 set guioptions-=l
@@ -95,11 +96,13 @@ endif
 
 "-------------[ files and backups ]--------------{{{2
 
-set directory=~/Library/Caches/ " Set the swap file directory
+set directory-=$HOME/backup
+set directory^=$HOME/backup//      " Set the swap file directory
 if has("vms")
   set nobackup		              " do not keep a backup file, use versions instead
 else
-  set backupdir=~/Library/Caches/
+  set backupdir-=$HOME/backup
+  set backupdir^=$HOME/backup//
   set backup		                " keep a backup file (restore to previous version)
   set undofile		              " keep an undo file (undo changes after closing)
 endif
@@ -199,11 +202,8 @@ autocmd FileType text setlocal autoindent expandtab softtabstop=4 textwidth=76 s
 
 autocmd FileType help setlocal nospell
 
-set dir^=~/.backup//
 
-set ignorecase
 
-<<<<<<< HEAD
 
 "--------------[ vim-airline (Status Bar) ]--------------{{{6
 let g:airline_powerline_fonts = 1
