@@ -10,7 +10,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+"Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -203,6 +203,7 @@ set dir^=~/.backup//
 
 set ignorecase
 
+<<<<<<< HEAD
 
 "--------------[ vim-airline (Status Bar) ]--------------{{{6
 let g:airline_powerline_fonts = 1
@@ -251,7 +252,6 @@ if !exists(":DiffOrig")
 endif
 
 "}}}
-
 
 
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
