@@ -77,12 +77,23 @@ set expandtab                    " insert space characters when tab is pressed
 set tabstop=2                    " insert 2 spaces for a tab, to be used with :retab
 set shiftwidth=2                 " number of space characters inserted for indentation
 set ignorecase                   " ignores cases
+set gcr=a:block-blinkon0         " no flashing
+
+" color scheme
+colorscheme codedark 
 
 " no scroll bars
 set guioptions-=l
 set guioptions-=L
 set guioptions-=r
 set guioptions-=R
+
+" mark the space indented with |
+let g:indentLine_char = '|'
+let g:indentLine_color_term = 239
+set conceallevel=1
+let g:indentLine_conceallevel=1
+let g:indentLine_enabled = 1
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -97,7 +108,7 @@ endif
 "-------------[ files and backups ]--------------{{{2
 
 set directory-=$HOME/backup
-set directory^=$HOME/backup//      " Set the swap file directory
+set directory^=$HOME/backup//   " set the swap file directory
 if has("vms")
   set nobackup		              " do not keep a backup file, use versions instead
 else
@@ -170,6 +181,8 @@ if has("autocmd")
     \   exe "normal! g`\"" |
     \ endif
 
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
   augroup END
 
 else
@@ -181,14 +194,7 @@ endif " has("autocmd")
 
 
 
-if has('langmap') && exists('+langnoremap')
-  " Prevent that the langmap option applies to characters that result from a
-  " mapping.  If unset (default), this may break plugins (but it's backward
-  " compatible).
-  set langnoremap
-endif
-
-
+"--------------[ macvim config ]----------------{{{6
 
 if has("gui_macvim")
 	let macvim_skip_cmd_opt_movement = 1
@@ -201,11 +207,13 @@ autocmd FileType make setlocal noexpandtab
 autocmd FileType text setlocal autoindent expandtab softtabstop=4 textwidth=76 spell spelllang=en_us
 
 autocmd FileType help setlocal nospell
+"}}}
 
 
 
 
-"--------------[ vim-airline (Status Bar) ]--------------{{{6
+"--------------[ vim-airline (Status Bar) ]--------------{{{7
+
 let g:airline_powerline_fonts = 1
 let g:airline_theme="tomorrow"
 let g:airline#extensions#tabline#enabled = 1
@@ -214,7 +222,8 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 
 
-"--------------[ ctrlp config ]-------------{{{7
+"--------------[ ctrlp config ]-------------{{{8
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -235,13 +244,14 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 
 
 
-"--------------[ nerdtree config ]--------------{{{8
+"--------------[ nerdtree config ]--------------{{{9
+
 let g:NERDTreeNotificationThreshold = 500
 "}}}
 
 
 
-"-------------[ customized commands ]--------------{{{9
+"-------------[ customized commands ]--------------{{{10
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -250,21 +260,4 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
-
 "}}}
-
-
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
-
-"no flashing
-set gcr=a:block-blinkon0
-
-colorscheme codedark 
-
-let g:indentLine_char = '|'
-let g:indentLine_color_term = 239
-set conceallevel=1
-let g:indentLine_conceallevel=1
-let g:indentLine_enabled = 1
-
-
